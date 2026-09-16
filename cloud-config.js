@@ -46,7 +46,9 @@ window.MINES_CLOUD={url:'https://tedkgyaannofgiicowib.supabase.co',key:'sb_publi
       } else if(app && !document.getElementById('passkeySetup')){
         try{
           var list=await C.auth.passkey.list();
-          var hasPasskey=!list.error && Array.isArray(list.data) && list.data.length>0;
+          var passkeys=list && list.data;
+          if(passkeys && !Array.isArray(passkeys)) passkeys=passkeys.passkeys||passkeys.credentials||passkeys.data||[];
+          var hasPasskey=!list.error && Array.isArray(passkeys) && passkeys.length>0;
           if(!hasPasskey){
             var box=document.createElement('div'); box.id='passkeySetup'; box.className='login';
             box.innerHTML='<b>Proteggi l’accesso con Face ID</b><p>Registra una passkey su questo iPhone. È necessario farlo una sola volta.</p><button id="registerFaceId">Attiva Face ID</button><div id="passkeyMsg" class="status" style="margin-top:10px"></div>';
@@ -56,8 +58,7 @@ window.MINES_CLOUD={url:'https://tedkgyaannofgiicowib.supabase.co',key:'sb_publi
               try{
                 var r=await C.auth.registerPasskey();
                 if(r.error)throw r.error;
-                m.textContent='Face ID configurato. Da ora puoi accedere con la passkey.';
-                document.getElementById('registerFaceId').style.display='none';
+                box.remove();
               }catch(e){m.textContent='Errore: '+(e.message||e)}
             };
           }
