@@ -1,1 +1,1 @@
-window.MINES_CLOUD={url:'https://tedkgyaannofgiicowib.supabase.co'};
+window.MINES_CLOUD={url:'https://tedkgyaannofgiicowib.supabase.co',key:'sb_publishable_MlCrvJZoYynFByaIDDrKwA_oizkJgJ1'};
