@@ -1,0 +1,1 @@
+window.MINES_CLOUD={url:'https://tedkgyaannofgiicowib.supabase.co'};
